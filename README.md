@@ -32,4 +32,4 @@ Proje, temiz bir kod mimarisi (Clean Architecture) prensiplerine uygun olarak ş
 
 1. Projeyi klonlayın:
    ```bash
-   git clone [https://github.com/kullaniciadi/gimbo-course-helper.git](https://github.com/kullaniciadi/gimbo-course-helper.git)
+   git clone https://github.com/bostnishak/Gimbo-The-Course-Helper-Mobile-Application-.git
