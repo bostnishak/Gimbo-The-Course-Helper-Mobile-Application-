@@ -1,7 +1,6 @@
 # 🎓 Gimbo Course Helper - Akademik Asistanın
 
 <p align="center">
-  <img src="screenshots/logo.png" alt="Gimbo Logo" width="200" onerror="this.src='https://raw.githubusercontent.com/bostnishak/Gimbo-The-Course-Helper-Mobile-Application-/main/screenshots/1.jpg'"/>
   <br>
   <b>Üniversite hayatını kolaylaştıran, derslerini tek bir merkezden yönetmeni sağlayan kapsamlı mobil eğitim platformu.</b>
 </p>
@@ -38,14 +37,6 @@ Proje, temiz bir kod mimarisi (Clean Architecture) prensiplerine uygun olarak ş
 - `notes_page.dart`: Kullanıcı notlarının saklandığı alan.
 - `TeachersPage.dart`: Eğitmen listesi ve detayları.
 
-## 📸 Uygulama İçi Görüntüler
-
-<p align="center">
-  <img src="screenshots/1.jpg" width="30%" />
-  <img src="screenshots/2.jpg" width="30%" />
-  <img src="screenshots/3.jpg" width="30%" />
-</p>
-
 ## ⚙️ Kurulum ve Başlatma
 
 1. **Projeyi Klonla**
@@ -66,5 +57,5 @@ Proje, temiz bir kod mimarisi (Clean Architecture) prensiplerine uygun olarak ş
 ---
 
 <p align="center">
-  Geliştiren: <b>Görkem Çolak</b>
+  Geliştirenler: <b>İshak Bostan</b> & <b>Görkem Çolak</b>
 </p>
