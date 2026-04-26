@@ -59,3 +59,5 @@ Proje, temiz bir kod mimarisi (Clean Architecture) prensiplerine uygun olarak ş
 <p align="center">
   Geliştirenler: <b>İshak Bostan</b> & <b>Eren Görkem Çolak</b>
 </p>
+
+proje bu şekilde
