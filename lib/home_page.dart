@@ -4,6 +4,7 @@ import 'notes_page.dart';
 import 'TeachersPage.dart'; // Yeni sayfa import edildi.
 import 'AnalysisPage.dart';
 import 'FeedbackPage.dart';
+import 'main.dart'; // Tema değiştirici için import edildi
 
 class HomePage extends StatelessWidget {
   final List<String> courseNames = [
@@ -24,22 +25,34 @@ class HomePage extends StatelessWidget {
     ["Experiment 1", "Experiment 2", "Report Writing"],
   ];
 
-  final List<Color> boxColors = [
-    Colors.redAccent,
-    Colors.blueAccent,
-    Colors.greenAccent,
-    Colors.orangeAccent,
-    Colors.purpleAccent,
-    Colors.tealAccent,
+  final List<List<Color>> cardGradients = [
+    [Colors.redAccent, Colors.deepOrange],
+    [Colors.blueAccent, Colors.lightBlue],
+    [Colors.greenAccent, Colors.teal],
+    [Colors.orangeAccent, Colors.deepOrangeAccent],
+    [Colors.purpleAccent, Colors.deepPurple],
+    [Colors.tealAccent, Colors.cyan],
+  ];
+
+  final List<IconData> courseIcons = [
+    Icons.calculate,
+    Icons.functions,
+    Icons.science,
+    Icons.public,
+    Icons.biotech,
+    Icons.electric_bolt,
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '       Welcome to\n     Course Helper GIMBO!',
-          textAlign: TextAlign.center,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Welcome to', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+            Text('Course Helper GIMBO 🚀', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          ],
         ),
         leading: Builder(
           builder: (context) => IconButton(
@@ -47,6 +60,25 @@ class HomePage extends StatelessWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
+        actions: [
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeNotifier,
+            builder: (_, ThemeMode currentMode, __) {
+              return IconButton(
+                icon: Icon(
+                  currentMode == ThemeMode.light
+                      ? Icons.dark_mode
+                      : Icons.light_mode,
+                ),
+                onPressed: () {
+                  themeNotifier.value = currentMode == ThemeMode.light
+                      ? ThemeMode.dark
+                      : ThemeMode.light;
+                },
+              );
+            },
+          ),
+        ],
       ),
       drawer: _buildDrawer(context),
       body: Padding(
@@ -71,26 +103,39 @@ class HomePage extends StatelessWidget {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: boxColors[index],
-                  borderRadius: BorderRadius.circular(12),
+                  gradient: LinearGradient(
+                    colors: cardGradients[index],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 6,
-                      offset: Offset(2, 4),
+                      color: cardGradients[index][0].withOpacity(0.4),
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Text(
-                    courseNames[index],
-                    style: TextStyle(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      courseIcons[index],
+                      size: 40,
                       color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
+                    SizedBox(height: 12),
+                    Text(
+                      courseNames[index],
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             );

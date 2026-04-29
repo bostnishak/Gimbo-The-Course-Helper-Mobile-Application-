@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class TeachersPage extends StatelessWidget {
   final List<Map<String, dynamic>> teachers = [
@@ -64,7 +65,18 @@ class TeachersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teachers'),
+        title: Text('Teachers', style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeNotifier,
+            builder: (_, ThemeMode currentMode, __) {
+              return IconButton(
+                icon: Icon(currentMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode),
+                onPressed: () { themeNotifier.value = currentMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light; },
+              );
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: teachers.length,
@@ -76,11 +88,12 @@ class TeachersPage extends StatelessWidget {
               leading: CircleAvatar(
                 child: Text(teacher['name'][0]), 
               ),
-              title: Text(teacher['name']),
+              title: Text(teacher['name'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               subtitle: Text(
                 'Branch: ${teacher['branch']}\n'
                 'Age: ${teacher['age']}\n'
                 'University: ${teacher['university']}',
+                style: TextStyle(fontWeight: FontWeight.w500),
               ),
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

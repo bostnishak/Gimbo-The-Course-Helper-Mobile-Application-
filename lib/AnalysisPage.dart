@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class AnalysisPage extends StatelessWidget {
   final List<Map<String, dynamic>> analysisData = [
@@ -44,7 +45,18 @@ class AnalysisPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Analysis'),
+        title: Text('Analysis', style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeNotifier,
+            builder: (_, ThemeMode currentMode, __) {
+              return IconButton(
+                icon: Icon(currentMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode),
+                onPressed: () { themeNotifier.value = currentMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light; },
+              );
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: analysisData.length,
@@ -110,7 +122,7 @@ class AnalysisPage extends StatelessWidget {
         SizedBox(height: 4.0),
         Text(
           label,
-          style: TextStyle(fontSize: 14.0, color: Colors.black54),
+          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
         ),
       ],
     );

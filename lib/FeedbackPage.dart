@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class FeedbackPage extends StatefulWidget {
   @override
@@ -36,7 +37,18 @@ class _FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feedback'),
+        title: Text('Feedback', style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeNotifier,
+            builder: (_, ThemeMode currentMode, __) {
+              return IconButton(
+                icon: Icon(currentMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode),
+                onPressed: () { themeNotifier.value = currentMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light; },
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,7 +62,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
             SizedBox(height: 10.0),
             Text(
               'Please let us know your suggestions, issues, or thoughts about the app.',
-              style: TextStyle(fontSize: 16.0, color: Colors.black54),
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20.0),
             TextField(
@@ -79,7 +91,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
               SizedBox(height: 10.0),
               Text(
                 _feedbackMessage,
-                style: TextStyle(fontSize: 16.0, color: Colors.black87),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
             ],
           ],

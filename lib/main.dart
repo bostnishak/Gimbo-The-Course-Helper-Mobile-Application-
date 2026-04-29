@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'home_page.dart';
 import 'placeholder_page.dart';  
 
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+
 void main() {
   runApp(MyApp());
 }
@@ -10,13 +12,31 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Main page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier,
+      builder: (_, ThemeMode currentMode, __) {
+        return MaterialApp(
+          title: 'GIMBO Course Helper',
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.blue,
+              brightness: Brightness.light,
+            ),
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.blue,
+              brightness: Brightness.dark,
+              surface: const Color(0xFF121212),
+            ),
+          ),
+          themeMode: currentMode,
+          debugShowCheckedModeBanner: false,
+          home: HomePage(),
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 
 class CoursePage extends StatefulWidget {
@@ -335,8 +336,19 @@ final Map<String, List<Map<String, dynamic>>> courseQuestions = {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.courseName),
+        title: Text(widget.courseName, style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.blueAccent,
+        actions: [
+          ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeNotifier,
+            builder: (_, ThemeMode currentMode, __) {
+              return IconButton(
+                icon: Icon(currentMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode),
+                onPressed: () { themeNotifier.value = currentMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light; },
+              );
+            },
+          ),
+        ],
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),
@@ -348,7 +360,7 @@ final Map<String, List<Map<String, dynamic>>> courseQuestions = {
           SizedBox(height: 16),
           for (var content in widget.contents)
             ListTile(
-              title: Text(content, style: TextStyle(fontSize: 18)),
+              title: Text(content, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
             ),
           SizedBox(height: 20),
           Text(
@@ -377,7 +389,7 @@ final Map<String, List<Map<String, dynamic>>> courseQuestions = {
             ),
             child: Text(
               _showQuestions ? "Hide Example Questions" : "Show Example Questions",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
             ),
           ),
           SizedBox(height: 20),
@@ -395,7 +407,7 @@ final Map<String, List<Map<String, dynamic>>> courseQuestions = {
       width: 150,
       height: 100,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Colors.grey.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
@@ -448,7 +460,7 @@ final Map<String, List<Map<String, dynamic>>> courseQuestions = {
         ),
         child: Text(
           option,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
     );
